@@ -12,10 +12,10 @@ export default function Navbar() {
     <nav
       className="fixed top-0 left-0 right-0 z-50 backdrop-blur-md bg-black/80 border-t border-white/10"
     >
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-20 flex items-center justify-between">
+      <div className="max-w-7xl mx-auto px-4 sm:px-8 lg:px-8 h-16 flex items-center justify-between">
         {/* Brand Logo with neon gradient text */}
         <div className="flex items-center gap-3">
-          <span className="text-2xl font-bold">
+          <span className="text-base sm:text-xl font-bold tracking-tight">
             {/* Neon gradient using bg-clip-text and text-transparent */}
             <span className="relative">
               ⚡{" "}
@@ -57,7 +57,7 @@ export default function Navbar() {
 
         {/* Action Button: Contact Us with pulsing green dot */}
         <a
-          href="#contact"
+          href="#services"
           className="relative flex items-center gap-2 text-sm font-medium text-white bg-gradient-to-r from-cyan-600 to-emerald-600 hover:from-cyan-500 hover:to-emerald-500 px-4 py-2 rounded-lg transition-all duration-300 backdrop-filter blur-sm"
         >
           Contact Us

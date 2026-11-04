@@ -1,0 +1,45 @@
+﻿"use client";
+
+import { useForm } from "react-hook-form";
+import { z } from "zod";
+import { zodResolver } from "@hookform/resolvers/zod";
+
+import { motion } from "framer-motion";
+import { CheckCircle, AlertCircle, MessageCircle, Phone, Mail, MailCheck, Calendar, Folder, Zap, Users, Globe, Leaf, Sunrise, Loader2, SunriseSnow, Flag, XCircle } from "lucide-react";
+import { cn } from "cn";
+
+import { useState, useRef } from "react";
+
+const serviceOptions = [
+  { value: "full-stack-mobile-dev", label: "Full-Stack Web & Mobile MVP Development" },
+  { value: "test-automation", label: "End-to-End UI & API Test Automation" },
+  { value: "audit-sanity-setup", label: "Playwright & Selenium Automation Audit & Sanity Setup" },
+  { value: "qa-strategy-bug-execution", label: "Comprehensive QA Strategy & Bug Execution" },
+];
+
+const budgetOptions = [
+  { value: "<250", label: "< $250" },
+  { value: "250-500", label: "$250 - $500" },
+  { value: "500-1000", label: "$500 - $1000" },
+  { value: "1000+", label: "$1000+" },
+];
+
+const NameSchema = z.string().min(2, "Name must be at least 2 characters");
+const EmailSchema = z.string().email("Enter a valid email address");
+const PhoneSchema = z.string().min(8, "Phone number must be at least 8 characters");
+const MessageSchema = z.string().min(10, "Message must be at least 10 characters");
+
+const ContactFormSchema = z.object({
+  name: NameSchema,
+  email: EmailSchema,
+  phone: PhoneSchema,
+  service: z.string().nonempty("Please select a service"),
+  budget: z.string().nonempty("Please select a budget range"),
+  message: MessageSchema,
+});
+
+type ContactFormValues = z.infer<typeof ContactFormSchema>;
+
+const successToastTimeout = 5000;
+
+export default function ContactForm() {
