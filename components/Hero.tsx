@@ -64,7 +64,7 @@ const prefixByType: Record<TerminalLine["type"], React.ReactNode> = {
 
 export default function Hero() {
   return (
-    <section id="hero" className="relative py-16 md:py-24 lg:py-32 overflow-hidden">
+    <section id="hero" className="relative pt-24 pb-12 sm:pt-32 sm:pb-20 overflow-hidden">
       <div className="absolute top-0 left-1/2 -translate-x-1/2 w-[700px] h-[500px] bg-cyan-500/10 blur-[120px] rounded-full -z-10" />
       <div className="absolute top-1/4 right-0 w-[600px] h-[400px] bg-emerald-500/10 blur-[120px] rounded-full -z-10" />
 
@@ -80,7 +80,7 @@ export default function Hero() {
               </span>
             </div>
 
-            <h1 className="text-5xl md:text-7xl font-bold tracking-tight leading-[1.05] text-white">
+            <h1 className="text-3xl xs:text-4xl sm:text-5xl lg:text-6xl font-extrabold leading-tight tracking-tight text-white">
               Engineering{" "}
               <span
                 className="relative inline-block bg-gradient-to-r from-cyan-400 via-emerald-500 to-blue-500 bg-clip-text text-transparent drop-shadow-[0_0_18px_rgba(34,211,238,0.35)]"
@@ -95,7 +95,7 @@ export default function Hero() {
               </span>
             </h1>
 
-            <p className="text-lg md:text-xl text-zinc-400 leading-relaxed max-w-xl">
+            <p className="text-sm sm:text-lg leading-relaxed text-slate-400 max-w-xl">
               Full-Stack Web &amp; Mobile MVPs • Playwright &amp; Selenium E2E
               Automation • SRE &amp; Cloud Infrastructure.
             </p>
@@ -134,7 +134,7 @@ export default function Hero() {
 
           <div className="relative">
             <div className="absolute -inset-1 bg-gradient-to-r from-cyan-500/20 via-emerald-500/10 to-blue-500/20 blur-xl rounded-2xl -z-10" />
-            <div className="relative rounded-2xl border border-white/10 bg-[#0b1020]/60 backdrop-blur-md shadow-2xl overflow-hidden">
+            <div className="relative overflow-x-auto max-w-full rounded-2xl border border-white/10 bg-[#0b1020]/60 backdrop-blur-md shadow-2xl">
               <div className="flex items-center justify-between px-5 py-3 border-b border-white/5 bg-white/3">
                 <div className="flex items-center gap-2">
                   <span className="flex flex-row gap-1.5">
@@ -150,7 +150,7 @@ export default function Hero() {
                   <span aria-hidden="true">⎌</span>
                 </button>
               </div>
-              <div className="p-5 font-mono text-sm">
+              <div className="p-3 sm:p-5 font-mono text-xs sm:text-sm whitespace-pre-wrap break-all leading-relaxed">
                 <motion.div
                   variants={containerVariants}
                   initial="hidden"
@@ -164,7 +164,7 @@ export default function Hero() {
                       className={cn("flex items-start gap-2", lineStyles[line.type])}
                     >
                       {prefixByType[line.type]}
-                      <span className="whitespace-pre">{line.text}</span>
+                      <span className="whitespace-pre-wrap break-all">{line.text}</span>
                     </motion.div>
                   ))}
                   <span className="text-emerald-400 animate-pulse">_</span>
