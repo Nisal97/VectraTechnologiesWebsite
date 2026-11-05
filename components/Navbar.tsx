@@ -15,19 +15,21 @@ export default function Navbar() {
     >
       <div className="max-w-7xl mx-auto px-4 sm:px-8 lg:px-8 h-16 flex items-center justify-between">
         {/* Brand Logo with neon gradient text */}
-        <div className="flex items-center gap-3">
-          <span className="text-base sm:text-xl font-bold tracking-tight">
-            {/* Neon gradient using bg-clip-text and text-transparent */}
-            <span className="relative">
-              ⚡{" "}
-              <span
-                className="inline-block bg-gradient-to-r from-cyan-500 to-emerald-600 bg-clip-text text-transparent"
-              >
-                VECTRA SOLUTIONS
+        <Link href="/">
+          <div className="flex items-center gap-3">
+            <span className="text-base sm:text-xl font-bold tracking-tight">
+              {/* Neon gradient using bg-clip-text and text-transparent */}
+              <span className="relative">
+                ⚡{" "}
+                <span
+                  className="inline-block bg-gradient-to-r from-cyan-500 to-emerald-600 bg-clip-text text-transparent"
+                >
+                  VECTRA SOLUTIONS
+                </span>
               </span>
             </span>
-          </span>
-        </div>
+          </div>
+        </Link>
 
         {/* Desktop Nav Links */}
         <div className="hidden sm:flex items-center gap-8">

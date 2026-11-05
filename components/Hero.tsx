@@ -2,6 +2,7 @@
 
 import { motion, type Variants } from "framer-motion";
 import { ArrowRight, CheckCircle, Monitor, Play } from "lucide-react";
+import Link from "next/link";
 import { cn } from "cn";
 
 const lineVariants: Variants = {
@@ -98,12 +99,9 @@ export default function Hero() {
               Automation • SRE &amp; Cloud Infrastructure.
             </p>
             <div className="flex flex-col sm:flex-row gap-4">
-              <a
-                href="#services"
-                className="inline-flex items-center justify-center w-full sm:w-auto rounded-lg bg-gradient-to-r from-cyan-600 to-emerald-600 hover:from-cyan-500 hover:to-emerald-500 text-white shadow-lg shadow-cyan-500/20 hover:shadow-cyan-500/35 transition-all px-4 py-3 text-sm font-medium"
-              >
+              <Link href="/services" className="inline-flex items-center justify-center w-full sm:w-auto rounded-lg bg-gradient-to-r from-cyan-600 to-emerald-600 hover:from-cyan-500 hover:to-emerald-500 text-white shadow-lg shadow-cyan-500/20 hover:shadow-cyan-500/35 transition-all px-4 py-3 text-sm font-medium">
                 Explore Services <ArrowRight size={20} className="ml-2" />
-              </a>
+              </Link>
               <a
                 href="#contact"
                 className="inline-flex items-center justify-center w-full sm:w-auto rounded-lg backdrop-blur-md bg-white/5 border border-white/10 text-white hover:bg-white/10 hover:border-white/20 transition-all px-4 py-3 text-sm font-medium"
