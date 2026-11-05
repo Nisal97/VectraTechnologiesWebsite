@@ -1,0 +1,30 @@
+import Navbar from "@/components/Navbar";
+import AutomationAudit from "@/components/services/AutomationAudit";
+import QaStrategy from "@/components/services/QaStrategy";
+import TechStackMatrix from "@/components/services/TechStackMatrix";
+import DeliveryProcess from "@/components/services/DeliveryProcess";
+import Footer from "@/components/Footer";
+import ServicesHero from "@/components/services/ServicesHero";
+import TestAutomation from "@/components/services/TestAutomation";
+import WebMobileMvp from "@/components/services/WebMobileMvp";
+
+export const metadata = {
+  title: "Engineering Services & Solutions | Vectra Solutions",
+  description: "Engineering services and solutions provided by Vectra Solutions",
+};
+
+export default function ServicesPage() {
+  return (
+    <main className="min-h-screen bg-[#090d16] text-white pt-16">
+      <Navbar />
+      <ServicesHero />
+      <WebMobileMvp />
+      <TestAutomation />
+      <AutomationAudit />
+      <QaStrategy />
+      <TechStackMatrix />
+      <DeliveryProcess />
+      <Footer />
+    </main>
+  );
+}
