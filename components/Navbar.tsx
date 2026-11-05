@@ -10,7 +10,7 @@ export default function Navbar() {
 
   return (
     <nav
-      className="fixed top-0 left-0 right-0 z-50 backdrop-blur-md bg-black/80 border-t border-white/10"
+      className="fixed top-0 left-0 right-0 z-50 backdrop-blur-md bg-[#090d16]/70 border-b border-white/10"
     >
       <div className="max-w-7xl mx-auto px-4 sm:px-8 lg:px-8 h-16 flex items-center justify-between">
         {/* Brand Logo with neon gradient text */}
@@ -32,7 +32,7 @@ export default function Navbar() {
         <div className="hidden sm:flex items-center gap-8">
           <a
             href="#services"
-            className="relative text-zinc-400 hover:text-white transition-colors"
+            className="relative text-white hover:text-white transition-colors"
           >
             Services
             <span className="absolute -bottom-1 left-0 h-0.5 w-full bg-gradient-to-r from-cyan-500 to-emerald-600 opacity-0 transition-opacity duration-300 hover:opacity-100"></span>
@@ -40,7 +40,7 @@ export default function Navbar() {
 
           <a
             href="#why-us"
-            className="relative text-zinc-400 hover:text-white transition-colors"
+            className="relative text-white hover:text-white transition-colors"
           >
             Why Us
             <span className="absolute -bottom-1 left-0 h-0.5 w-full bg-gradient-to-r from-cyan-500 to-emerald-600 opacity-0 transition-opacity duration-300 hover:opacity-100"></span>
@@ -48,7 +48,7 @@ export default function Navbar() {
 
           <a
             href="#team"
-            className="relative text-zinc-400 hover:text-white transition-colors"
+            className="relative text-white hover:text-white transition-colors"
           >
             Team
             <span className="absolute -bottom-1 left-0 h-0.5 w-full bg-gradient-to-r from-cyan-500 to-emerald-600 opacity-0 transition-opacity duration-300 hover:opacity-100"></span>
@@ -58,7 +58,7 @@ export default function Navbar() {
         {/* Action Button: Contact Us with pulsing green dot */}
         <a
           href="#services"
-          className="relative flex items-center gap-2 text-sm font-medium text-white bg-gradient-to-r from-cyan-600 to-emerald-600 hover:from-cyan-500 hover:to-emerald-500 px-4 py-2 rounded-lg transition-all duration-300 backdrop-filter blur-sm"
+          className="relative hidden md:flex items-center gap-2 text-sm font-medium text-white bg-gradient-to-r from-cyan-600 to-emerald-600 hover:from-cyan-500 hover:to-emerald-500 px-4 py-2 rounded-lg transition-all duration-300 backdrop-filter blur-sm"
         >
           Contact Us
           <span className="relative inline-block w-2 h-2 bg-green-500 rounded-full animate-pulse" aria-hidden="true" />
