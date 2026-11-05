@@ -3,6 +3,7 @@ import AutomationAudit from "@/components/services/AutomationAudit";
 import QaStrategy from "@/components/services/QaStrategy";
 import TechStackMatrix from "@/components/services/TechStackMatrix";
 import DeliveryProcess from "@/components/services/DeliveryProcess";
+import PricingModels from "@/components/services/PricingModels";
 import Footer from "@/components/Footer";
 import ServicesHero from "@/components/services/ServicesHero";
 import TestAutomation from "@/components/services/TestAutomation";
@@ -24,6 +25,7 @@ export default function ServicesPage() {
       <QaStrategy />
       <TechStackMatrix />
       <DeliveryProcess />
+      <PricingModels />
       <Footer />
     </main>
   );
