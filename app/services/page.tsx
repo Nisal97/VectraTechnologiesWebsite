@@ -1,3 +1,4 @@
+import type { Metadata } from "next";
 import Navbar from "@/components/Navbar";
 import AutomationAudit from "@/components/services/AutomationAudit";
 import QaStrategy from "@/components/services/QaStrategy";
@@ -10,9 +11,8 @@ import ServicesHero from "@/components/services/ServicesHero";
 import TestAutomation from "@/components/services/TestAutomation";
 import WebMobileMvp from "@/components/services/WebMobileMvp";
 
-export const metadata = {
-  title: "Engineering Services & Solutions | Vectra Solutions",
-  description: "Engineering services and solutions provided by Vectra Solutions",
+export const metadata: Metadata = {
+  title: "Services",
 };
 
 export default function ServicesPage() {
