@@ -53,6 +53,14 @@ export default function Navbar() {
             Team
             <span className="absolute -bottom-1 left-0 h-0.5 w-full bg-gradient-to-r from-cyan-500 to-emerald-600 opacity-0 transition-opacity duration-300 hover:opacity-100"></span>
           </a>
+
+          <Link
+            href="/contact"
+            className="relative text-white hover:text-white transition-colors"
+          >
+            Contact
+            <span className="absolute -bottom-1 left-0 h-0.5 w-full bg-gradient-to-r from-cyan-500 to-emerald-600 opacity-0 transition-opacity duration-300 hover:opacity-100"></span>
+          </Link>
         </div>
 
         {/* Action Button: Contact Us with pulsing green dot */}
@@ -86,12 +94,12 @@ export default function Navbar() {
           >
             Team
           </a>
-          <a
-            href="#contact"
+          <Link
+            href="/contact"
             className="text-2xl font-bold text-white hover:text-emerald-500 transition-colors"
           >
-            Contact Us
-          </a>
+            Contact
+          </Link>
           <button
             onClick={handleMenu}
             className="absolute top-6 right-6 text-white/60"
