@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
 import ContactInfo from "@/components/contact/ContactInfo";
+import ContactForm from "@/components/contact/ContactForm";
 
 export const metadata: Metadata = {
   title: "Contact Studio",
@@ -46,13 +47,7 @@ export default function ContactPage() {
             <ContactInfo />
           </div>
           <div className="lg:col-span-7">
-            <div
-              id="contact-form-slot"
-              data-testid="contact-form-slot"
-              className="rounded-2xl border border-white/10 bg-slate-900/40 p-8 text-slate-400 text-sm"
-            >
-              Contact Form Panel (Steps 5–7)
-            </div>
+            <ContactForm />
           </div>
         </div>
       </main>
