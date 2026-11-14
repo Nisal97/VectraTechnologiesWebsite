@@ -43,3 +43,6 @@ next-env.d.ts
 # Cloudflare Wrangler local state & secrets
 .dev.vars
 .wrangler/
+
+#cline
+.clinerules
