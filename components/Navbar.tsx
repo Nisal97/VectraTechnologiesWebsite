@@ -63,12 +63,6 @@ export default function Navbar() {
           </Link>
         </div>
 
-        {/* Action Button: Contact Us with pulsing green dot */}
-        <Link href="/services" className="relative hidden md:flex items-center gap-2 text-sm font-medium text-white bg-gradient-to-r from-cyan-600 to-emerald-600 hover:from-cyan-500 hover:to-emerald-500 px-4 py-2 rounded-lg transition-all duration-300 backdrop-filter blur-sm">
-          Contact Us
-          <span className="relative inline-block w-2 h-2 bg-green-500 rounded-full animate-pulse" aria-hidden="true" />
-        </Link>
-
         {/* Mobile Menu Toggle */}
         <button
           onClick={handleMenu}
