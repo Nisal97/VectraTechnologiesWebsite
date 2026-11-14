@@ -37,7 +37,9 @@ export default function ContactForm() {
   const [values, setValues] = useState<ContactFormValues>(INITIAL_VALUES);
   const [errors, setErrors] = useState<ContactFormErrors>({});
   const [minDate, setMinDate] = useState<string>("");
-  const [validationNotice, setValidationNotice] = useState<string>("");
+  const [isSubmitting, setIsSubmitting] = useState(false);
+  const [submitStatus, setSubmitStatus] = useState<"idle" | "success" | "error">("idle");
+  const [errorMessage, setErrorMessage] = useState("");
 
   useEffect(() => {
     try {
@@ -65,7 +67,7 @@ export default function ContactForm() {
     const field = name as keyof ContactFormValues;
 
     setValues((prev) => ({ ...prev, [field]: value }));
-    setValidationNotice("");
+    if (submitStatus !== "idle") setSubmitStatus("idle");
 
     setErrors((prev) => {
       const next = { ...prev };
@@ -77,9 +79,10 @@ export default function ContactForm() {
     });
   };
 
-  const handleSubmit = (e: FormEvent<HTMLFormElement>) => {
+  const handleSubmit = async (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-    setValidationNotice("");
+    setSubmitStatus("idle");
+    setErrorMessage("");
 
     const result = validateContactForm(values);
     if (!result.isValid) {
@@ -88,11 +91,80 @@ export default function ContactForm() {
     }
 
     setErrors({});
-    // Temporary Step 6 confirmation — replaced with POST /api/contact in Step 7
-    setValidationNotice(
-      "All fields validated! Ready to wire up API submission in Step 7."
-    );
+    setIsSubmitting(true);
+
+    if (values.honeypot) {
+      setIsSubmitting(false);
+      setSubmitStatus("success");
+      setValues(INITIAL_VALUES);
+      return;
+    }
+
+    try {
+      const response = await fetch("/api/contact", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(result.sanitized),
+      });
+
+      if (!response.ok) {
+        throw new Error("Failed to send inquiry.");
+      }
+
+      setSubmitStatus("success");
+      setValues((prev) => ({ ...INITIAL_VALUES, timezone: prev.timezone }));
+      window.scrollTo({ top: 0, behavior: "smooth" });
+    } catch {
+      setSubmitStatus("error");
+      setErrorMessage(
+        "Network error: Unable to submit your inquiry. Please email us directly at contact@vectrasolutions.dev"
+      );
+    } finally {
+      setIsSubmitting(false);
+    }
   };
+
+  if (submitStatus === "success") {
+    return (
+      <div
+        data-testid="contact-success-state"
+        className="rounded-2xl border border-emerald-500/30 bg-emerald-500/10 backdrop-blur-xl p-8 sm:p-12 text-center"
+      >
+        <div className="mx-auto flex h-16 w-16 items-center justify-center rounded-full bg-emerald-500/20 mb-6">
+          <svg
+            className="h-8 w-8 text-emerald-400"
+            fill="none"
+            viewBox="0 0 24 24"
+            stroke="currentColor"
+            strokeWidth={2}
+          >
+            <path
+              strokeLinecap="round"
+              strokeLinejoin="round"
+              d="M5 13l4 4L19 7"
+            />
+          </svg>
+        </div>
+        <span className="text-xs font-mono uppercase tracking-widest text-emerald-400 block mb-2">
+          // TRANSMISSION CONFIRMED
+        </span>
+        <h2 className="text-2xl font-bold text-white mb-3">
+          Request Sent to the Vectra Team
+        </h2>
+        <p className="text-slate-300 mb-8 max-w-md mx-auto leading-relaxed">
+          Thank you for reaching out. Your project inquiry has been logged and
+          sent to our engineering team—we&apos;ll get back to you within 24 hours.
+        </p>
+        <button
+          type="button"
+          onClick={() => setSubmitStatus("idle")}
+          className="inline-flex items-center gap-2 rounded-xl border border-cyan-500/30 bg-cyan-500/10 px-5 py-2.5 text-sm font-semibold text-cyan-300 hover:bg-cyan-500/20 transition-colors cursor-pointer"
+        >
+          Send another inquiry &rarr;
+        </button>
+      </div>
+    );
+  }
 
   return (
     <form
@@ -479,13 +551,13 @@ export default function ContactForm() {
         </div>
       </div>
 
-      {/* Temporary Step 6 Validation Notice */}
-      {validationNotice && (
+      {/* Submission Error Banner */}
+      {submitStatus === "error" && (
         <div
-          data-testid="validation-notice"
-          className="rounded-xl border border-emerald-500/30 bg-emerald-500/10 px-4 py-3 text-xs text-emerald-300"
+          data-testid="contact-error-banner"
+          className="rounded-xl border border-rose-500/30 bg-rose-500/10 px-4 py-3 text-xs text-rose-300"
         >
-          {validationNotice}
+          {errorMessage}
         </div>
       )}
 
@@ -495,9 +567,36 @@ export default function ContactForm() {
           id="submit-contact-btn"
           data-testid="submit-contact-btn"
           type="submit"
-          className="w-full rounded-xl bg-gradient-to-r from-cyan-500 to-emerald-500 px-6 py-3.5 text-sm font-semibold text-slate-950 shadow-lg shadow-cyan-500/20 hover:from-cyan-400 hover:to-emerald-400 focus:outline-none focus:ring-2 focus:ring-cyan-400 focus:ring-offset-2 focus:ring-offset-slate-950 transition-all cursor-pointer"
+          disabled={isSubmitting}
+          className="w-full flex items-center justify-center gap-2 rounded-xl bg-gradient-to-r from-cyan-500 to-emerald-500 px-6 py-3.5 text-sm font-semibold text-slate-950 shadow-lg shadow-cyan-500/20 hover:from-cyan-400 hover:to-emerald-400 focus:outline-none focus:ring-2 focus:ring-cyan-400 focus:ring-offset-2 focus:ring-offset-slate-950 transition-all cursor-pointer disabled:opacity-70 disabled:cursor-not-allowed"
         >
-          Send Project Inquiry
+          {isSubmitting ? (
+            <>
+              <svg
+                className="animate-spin h-4 w-4 text-slate-950"
+                xmlns="http://www.w3.org/2000/svg"
+                fill="none"
+                viewBox="0 0 24 24"
+              >
+                <circle
+                  className="opacity-25"
+                  cx="12"
+                  cy="12"
+                  r="10"
+                  stroke="currentColor"
+                  strokeWidth="4"
+                />
+                <path
+                  className="opacity-75"
+                  fill="currentColor"
+                  d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"
+                />
+              </svg>
+              Sending...
+            </>
+          ) : (
+            "Send Project Inquiry"
+          )}
         </button>
       </div>
     </form>
