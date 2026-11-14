@@ -102,7 +102,7 @@ export async function onRequestPost(context: PagesContext): Promise<Response> {
   };
 
   const supabaseResponse = await fetch(
-    `${supabaseUrl}/rest/v1/contact_inquiries`,
+    `${supabaseUrl}/rest/v1/contact_submissions`,
     {
       method: "POST",
       headers: {
@@ -132,7 +132,7 @@ export async function onRequestPost(context: PagesContext): Promise<Response> {
     );
   }
 
-  const toEmail = env.CONTACT_TO_EMAIL || "thadipoosa69@gmail.com";
+  const toEmail = env.CONTACT_TO_EMAIL || "nmmuthugala@gmail.com";
   const fromEmail =
     env.CONTACT_FROM_EMAIL || "Vectra Solutions <onboarding@resend.dev>";
 

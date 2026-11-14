@@ -112,7 +112,8 @@ export default function ContactForm() {
       }
 
       setSubmitStatus("success");
-      setValues(INITIAL_VALUES);
+      setValues((prev) => ({ ...INITIAL_VALUES, timezone: prev.timezone }));
+      window.scrollTo({ top: 0, behavior: "smooth" });
     } catch {
       setSubmitStatus("error");
       setErrorMessage(
@@ -122,6 +123,48 @@ export default function ContactForm() {
       setIsSubmitting(false);
     }
   };
+
+  if (submitStatus === "success") {
+    return (
+      <div
+        data-testid="contact-success-state"
+        className="rounded-2xl border border-emerald-500/30 bg-emerald-500/10 backdrop-blur-xl p-8 sm:p-12 text-center"
+      >
+        <div className="mx-auto flex h-16 w-16 items-center justify-center rounded-full bg-emerald-500/20 mb-6">
+          <svg
+            className="h-8 w-8 text-emerald-400"
+            fill="none"
+            viewBox="0 0 24 24"
+            stroke="currentColor"
+            strokeWidth={2}
+          >
+            <path
+              strokeLinecap="round"
+              strokeLinejoin="round"
+              d="M5 13l4 4L19 7"
+            />
+          </svg>
+        </div>
+        <span className="text-xs font-mono uppercase tracking-widest text-emerald-400 block mb-2">
+          // TRANSMISSION CONFIRMED
+        </span>
+        <h2 className="text-2xl font-bold text-white mb-3">
+          Request Sent to the Vectra Team
+        </h2>
+        <p className="text-slate-300 mb-8 max-w-md mx-auto leading-relaxed">
+          Thank you for reaching out. Your project inquiry has been logged and
+          sent to our engineering team—we&apos;ll get back to you within 24 hours.
+        </p>
+        <button
+          type="button"
+          onClick={() => setSubmitStatus("idle")}
+          className="inline-flex items-center gap-2 rounded-xl border border-cyan-500/30 bg-cyan-500/10 px-5 py-2.5 text-sm font-semibold text-cyan-300 hover:bg-cyan-500/20 transition-colors cursor-pointer"
+        >
+          Send another inquiry &rarr;
+        </button>
+      </div>
+    );
+  }
 
   return (
     <form
