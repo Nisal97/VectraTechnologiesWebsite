@@ -43,9 +43,6 @@ export default function Footer() {
 
           {/* Column 2: Navigation Links (3 cols) */}
           <div className="md:col-span-3 space-y-3">
-            <h4 className="font-mono text-xs uppercase tracking-wider text-white font-bold">
-              // Navigation
-            </h4>
             <ul className="space-y-2.5 text-xs sm:text-sm">
               <li>
                 <Link className="hover:text-cyan-400 transition-colors" href="/">
@@ -77,9 +74,6 @@ export default function Footer() {
 
           {/* Column 3: Capabilities (4 cols) */}
           <div className="md:col-span-4 space-y-3">
-            <h4 className="font-mono text-xs uppercase tracking-wider text-white font-bold">
-              // Capabilities
-            </h4>
             <ul className="space-y-2.5 text-xs text-slate-400 font-mono">
               <li className="flex items-center gap-2">
                 <Terminal className="w-3.5 h-3.5 text-cyan-400 shrink-0"/>
@@ -103,11 +97,8 @@ export default function Footer() {
         </div>
 
         {/* Bottom Bar */}
-        <div className="pt-8 border-t border-white/10 flex flex-col sm:flex-row items-center justify-between gap-4 text-xs font-mono text-slate-500">
+        <div className="pt-8 border-t border-white/10 flex flex-col sm:flex-row items-center justify-center gap-4 text-xs font-mono text-slate-500">
           <p>© 2026 Vectra Solutions. All rights reserved.</p>
-          <p className="flex items-center gap-1">
-            Built with <span className="text-cyan-400 font-semibold">Next.js 15</span> & <span className="text-cyan-400 font-semibold">Tailwind CSS</span>
-          </p>
         </div>
       </div>
     </footer>
