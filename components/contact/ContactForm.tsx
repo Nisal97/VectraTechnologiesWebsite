@@ -215,7 +215,7 @@ export default function ContactForm() {
               data-testid="input-first-name"
               type="text"
               required
-              placeholder="Nisal"
+              placeholder="John"
               value={values.firstName}
               onChange={handleChange}
               className="w-full rounded-xl border border-white/10 bg-slate-950/60 px-4 py-3 text-sm text-white placeholder-slate-500 focus:border-cyan-400 focus:outline-none focus:ring-1 focus:ring-cyan-400 transition-colors"
@@ -244,7 +244,7 @@ export default function ContactForm() {
               data-testid="input-last-name"
               type="text"
               required
-              placeholder="Muthugala"
+              placeholder="Doe"
               value={values.lastName}
               onChange={handleChange}
               className="w-full rounded-xl border border-white/10 bg-slate-950/60 px-4 py-3 text-sm text-white placeholder-slate-500 focus:border-cyan-400 focus:outline-none focus:ring-1 focus:ring-cyan-400 transition-colors"
