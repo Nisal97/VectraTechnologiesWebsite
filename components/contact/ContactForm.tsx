@@ -37,7 +37,9 @@ export default function ContactForm() {
   const [values, setValues] = useState<ContactFormValues>(INITIAL_VALUES);
   const [errors, setErrors] = useState<ContactFormErrors>({});
   const [minDate, setMinDate] = useState<string>("");
-  const [validationNotice, setValidationNotice] = useState<string>("");
+  const [isSubmitting, setIsSubmitting] = useState(false);
+  const [submitStatus, setSubmitStatus] = useState<"idle" | "success" | "error">("idle");
+  const [errorMessage, setErrorMessage] = useState("");
 
   useEffect(() => {
     try {
@@ -65,7 +67,7 @@ export default function ContactForm() {
     const field = name as keyof ContactFormValues;
 
     setValues((prev) => ({ ...prev, [field]: value }));
-    setValidationNotice("");
+    if (submitStatus !== "idle") setSubmitStatus("idle");
 
     setErrors((prev) => {
       const next = { ...prev };
@@ -77,9 +79,10 @@ export default function ContactForm() {
     });
   };
 
-  const handleSubmit = (e: FormEvent<HTMLFormElement>) => {
+  const handleSubmit = async (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-    setValidationNotice("");
+    setSubmitStatus("idle");
+    setErrorMessage("");
 
     const result = validateContactForm(values);
     if (!result.isValid) {
@@ -88,10 +91,36 @@ export default function ContactForm() {
     }
 
     setErrors({});
-    // Temporary Step 6 confirmation — replaced with POST /api/contact in Step 7
-    setValidationNotice(
-      "All fields validated! Ready to wire up API submission in Step 7."
-    );
+    setIsSubmitting(true);
+
+    if (values.honeypot) {
+      setIsSubmitting(false);
+      setSubmitStatus("success");
+      setValues(INITIAL_VALUES);
+      return;
+    }
+
+    try {
+      const response = await fetch("/api/contact", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(result.sanitized),
+      });
+
+      if (!response.ok) {
+        throw new Error("Failed to send inquiry.");
+      }
+
+      setSubmitStatus("success");
+      setValues(INITIAL_VALUES);
+    } catch {
+      setSubmitStatus("error");
+      setErrorMessage(
+        "Network error: Unable to submit your inquiry. Please email us directly at contact@vectrasolutions.dev"
+      );
+    } finally {
+      setIsSubmitting(false);
+    }
   };
 
   return (
@@ -479,13 +508,13 @@ export default function ContactForm() {
         </div>
       </div>
 
-      {/* Temporary Step 6 Validation Notice */}
-      {validationNotice && (
+      {/* Submission Error Banner */}
+      {submitStatus === "error" && (
         <div
-          data-testid="validation-notice"
-          className="rounded-xl border border-emerald-500/30 bg-emerald-500/10 px-4 py-3 text-xs text-emerald-300"
+          data-testid="contact-error-banner"
+          className="rounded-xl border border-rose-500/30 bg-rose-500/10 px-4 py-3 text-xs text-rose-300"
         >
-          {validationNotice}
+          {errorMessage}
         </div>
       )}
 
@@ -495,9 +524,36 @@ export default function ContactForm() {
           id="submit-contact-btn"
           data-testid="submit-contact-btn"
           type="submit"
-          className="w-full rounded-xl bg-gradient-to-r from-cyan-500 to-emerald-500 px-6 py-3.5 text-sm font-semibold text-slate-950 shadow-lg shadow-cyan-500/20 hover:from-cyan-400 hover:to-emerald-400 focus:outline-none focus:ring-2 focus:ring-cyan-400 focus:ring-offset-2 focus:ring-offset-slate-950 transition-all cursor-pointer"
+          disabled={isSubmitting}
+          className="w-full flex items-center justify-center gap-2 rounded-xl bg-gradient-to-r from-cyan-500 to-emerald-500 px-6 py-3.5 text-sm font-semibold text-slate-950 shadow-lg shadow-cyan-500/20 hover:from-cyan-400 hover:to-emerald-400 focus:outline-none focus:ring-2 focus:ring-cyan-400 focus:ring-offset-2 focus:ring-offset-slate-950 transition-all cursor-pointer disabled:opacity-70 disabled:cursor-not-allowed"
         >
-          Send Project Inquiry
+          {isSubmitting ? (
+            <>
+              <svg
+                className="animate-spin h-4 w-4 text-slate-950"
+                xmlns="http://www.w3.org/2000/svg"
+                fill="none"
+                viewBox="0 0 24 24"
+              >
+                <circle
+                  className="opacity-25"
+                  cx="12"
+                  cy="12"
+                  r="10"
+                  stroke="currentColor"
+                  strokeWidth="4"
+                />
+                <path
+                  className="opacity-75"
+                  fill="currentColor"
+                  d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"
+                />
+              </svg>
+              Sending...
+            </>
+          ) : (
+            "Send Project Inquiry"
+          )}
         </button>
       </div>
     </form>
