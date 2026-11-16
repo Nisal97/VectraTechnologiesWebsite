@@ -1,5 +1,7 @@
 "use client";
 
+import Link from "next/link";
+
 export default function ServicesCta() {
   return (
     <section id="services-cta" className="py-16 sm:py-24 px-4 sm:px-6 max-w-7xl mx-auto">
@@ -41,12 +43,9 @@ export default function ServicesCta() {
 
         {/* Call to Action Buttons */}
         <div className="mt-16 space-x-4">
-          <a
-            href="mailto:contact@vectrasolutions.dev"
-            className="bg-gradient-to-r from-cyan-500 to-blue-600 hover:opacity-90 text-white font-bold px-8 py-4 rounded-xl text-base sm:text-lg transition-all shadow-lg hover:shadow-cyan-500/25 inline-block m-2"
-          >
+          <Link href="/contact" className="bg-gradient-to-r from-cyan-500 to-blue-600 hover:opacity-90 text-white font-bold px-8 py-4 rounded-xl text-base sm:text-lg transition-all shadow-lg hover:shadow-cyan-500/25 inline-block m-2">
             Schedule a Technical Consult ⚡
-          </a>
+          </Link>
           <a
             href="#pricing-models"
             className="bg-slate-950/80 hover:bg-slate-900 text-slate-300 border border-white/10 px-8 py-4 rounded-xl text-base sm:text-lg font-semibold transition-all inline-block m-2"
