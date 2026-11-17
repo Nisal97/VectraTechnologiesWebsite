@@ -7,100 +7,104 @@ import { Menu, X } from "lucide-react";
 export default function Navbar() {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
 
-  const handleMenu = () => setIsMenuOpen(!isMenuOpen);
+  const toggleMenu = () => setIsMenuOpen((prev) => !prev);
+  const closeMenu = () => setIsMenuOpen(false);
 
   return (
     <nav
-      className="fixed top-0 left-0 right-0 z-50 backdrop-blur-md bg-[#090d16]/70 border-b border-white/10"
+      className={`fixed top-0 left-0 right-0 z-50 backdrop-blur-md border-b border-white/10 transition-colors ${
+        isMenuOpen ? "bg-[#090d16]" : "bg-[#090d16]/80"
+      }`}
     >
-      <div className="max-w-7xl mx-auto px-4 sm:px-8 lg:px-8 h-16 flex items-center justify-between">
-        {/* Brand Logo with neon gradient text */}
-        <Link href="/">
-          <div className="flex items-center gap-3">
-            <span className="text-base sm:text-xl font-bold tracking-tight">
-              {/* Neon gradient using bg-clip-text and text-transparent */}
-              <span className="relative">
-                ⚡{" "}
-                <span
-                  className="inline-block bg-gradient-to-r from-cyan-500 to-emerald-600 bg-clip-text text-transparent"
-                >
-                  VECTRA SOLUTIONS
-                </span>
-              </span>
+      <div className="max-w-7xl mx-auto px-4 sm:px-8 h-16 flex items-center justify-between">
+        {/* Brand Logo */}
+        <Link href="/" onClick={closeMenu} className="flex items-center gap-2">
+          <span className="text-base sm:text-xl font-bold tracking-tight">
+            ⚡{" "}
+            <span className="inline-block bg-gradient-to-r from-cyan-500 to-emerald-600 bg-clip-text text-transparent">
+              VECTRA SOLUTIONS
             </span>
-          </div>
+          </span>
         </Link>
 
         {/* Desktop Nav Links */}
         <div className="hidden sm:flex items-center gap-8">
-          <Link href="/services" className="relative text-white hover:text-white transition-colors">
-              Services
-              <span className="absolute -bottom-1 left-0 h-0.5 w-full bg-gradient-to-r from-cyan-500 to-emerald-600 opacity-0 transition-opacity duration-300 hover:opacity-100"></span>
-            </Link>
+          <Link
+            href="/services"
+            className="group relative text-sm font-medium text-slate-200 hover:text-white transition-colors"
+          >
+            Services
+            <span className="absolute -bottom-1 left-0 h-0.5 w-full bg-gradient-to-r from-cyan-500 to-emerald-600 opacity-0 transition-opacity duration-300 group-hover:opacity-100" />
+          </Link>
 
-          <a
-            href="#why-us"
-            className="relative text-white hover:text-white transition-colors"
+          <Link
+            href="/why-us"
+            className="group relative text-sm font-medium text-slate-200 hover:text-white transition-colors"
           >
             Why Us
-            <span className="absolute -bottom-1 left-0 h-0.5 w-full bg-gradient-to-r from-cyan-500 to-emerald-600 opacity-0 transition-opacity duration-300 hover:opacity-100"></span>
-          </a>
+            <span className="absolute -bottom-1 left-0 h-0.5 w-full bg-gradient-to-r from-cyan-500 to-emerald-600 opacity-0 transition-opacity duration-300 group-hover:opacity-100" />
+          </Link>
 
           <a
             href="#team"
-            className="relative text-white hover:text-white transition-colors"
+            className="group relative text-sm font-medium text-slate-200 hover:text-white transition-colors"
           >
             Team
-            <span className="absolute -bottom-1 left-0 h-0.5 w-full bg-gradient-to-r from-cyan-500 to-emerald-600 opacity-0 transition-opacity duration-300 hover:opacity-100"></span>
+            <span className="absolute -bottom-1 left-0 h-0.5 w-full bg-gradient-to-r from-cyan-500 to-emerald-600 opacity-0 transition-opacity duration-300 group-hover:opacity-100" />
           </a>
 
           <Link
             href="/contact"
-            className="relative text-white hover:text-white transition-colors"
+            className="group relative text-sm font-medium text-slate-200 hover:text-white transition-colors"
           >
             Contact
-            <span className="absolute -bottom-1 left-0 h-0.5 w-full bg-gradient-to-r from-cyan-500 to-emerald-600 opacity-0 transition-opacity duration-300 hover:opacity-100"></span>
+            <span className="absolute -bottom-1 left-0 h-0.5 w-full bg-gradient-to-r from-cyan-500 to-emerald-600 opacity-0 transition-opacity duration-300 group-hover:opacity-100" />
           </Link>
         </div>
 
         {/* Mobile Menu Toggle */}
         <button
-          onClick={handleMenu}
-          className="sm:hidden p-2 rounded-lg hover:bg-white/5 transition-colors"
+          type="button"
+          onClick={toggleMenu}
+          className="sm:hidden p-2 rounded-lg text-slate-200 hover:text-white hover:bg-white/5 transition-colors"
           aria-label="Toggle menu"
+          aria-expanded={isMenuOpen}
         >
           {isMenuOpen ? <X size={24} /> : <Menu size={24} />}
         </button>
       </div>
 
-      {/* Mobile Menu (visible when open) */}
+      {/* Mobile Dropdown Panel */}
       {isMenuOpen && (
-        <div className="fixed inset-0 z-40 bg-black/90 flex flex-col items-center justify-center gap-8 pointer-events-auto">
-          <Link href="/services" className="text-2xl font-bold text-white hover:text-cyan-500 transition-colors">
-              Services
-            </Link>
-            <Link href="#why-us" className="text-2xl font-bold text-white hover:text-cyan-500 transition-colors">
+        <div className="sm:hidden bg-[#090d16] border-t border-white/10 px-4 py-4 flex flex-col gap-1 shadow-2xl">
+          <Link
+            href="/services"
+            onClick={closeMenu}
+            className="px-3 py-3 rounded-xl text-base font-medium text-slate-200 hover:text-cyan-400 hover:bg-white/5 transition-colors"
+          >
+            Services
+          </Link>
+          <Link
+            href="/why-us"
+            onClick={closeMenu}
+            className="px-3 py-3 rounded-xl text-base font-medium text-slate-200 hover:text-cyan-400 hover:bg-white/5 transition-colors"
+          >
             Why Us
-            </Link>
+          </Link>
           <a
             href="#team"
-            className="text-2xl font-bold text-white hover:text-cyan-500 transition-colors"
+            onClick={closeMenu}
+            className="px-3 py-3 rounded-xl text-base font-medium text-slate-200 hover:text-cyan-400 hover:bg-white/5 transition-colors"
           >
             Team
           </a>
           <Link
             href="/contact"
-            className="text-2xl font-bold text-white hover:text-emerald-500 transition-colors"
+            onClick={closeMenu}
+            className="px-3 py-3 rounded-xl text-base font-medium text-slate-200 hover:text-emerald-400 hover:bg-white/5 transition-colors"
           >
             Contact
           </Link>
-          <button
-            onClick={handleMenu}
-            className="absolute top-6 right-6 text-white/60"
-            aria-label="Close menu"
-          >
-            <X size={24} />
-          </button>
         </div>
       )}
     </nav>
