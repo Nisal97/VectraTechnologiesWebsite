@@ -55,13 +55,8 @@ export default function Footer() {
                 </Link>
               </li>
               <li>
-                <Link className="hover:text-cyan-400 transition-colors" href="/#why-us">
+                <Link className="hover:text-cyan-400 transition-colors" href="/">
                   Why Work With Us
-                </Link>
-              </li>
-              <li>
-                <Link className="hover:text-cyan-400 transition-colors" href="/#team">
-                  Our Team
                 </Link>
               </li>
               <li>

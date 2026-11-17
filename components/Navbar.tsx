@@ -45,14 +45,6 @@ export default function Navbar() {
             <span className="absolute -bottom-1 left-0 h-0.5 w-full bg-gradient-to-r from-cyan-500 to-emerald-600 opacity-0 transition-opacity duration-300 group-hover:opacity-100" />
           </Link>
 
-          <a
-            href="#team"
-            className="group relative text-sm font-medium text-slate-200 hover:text-white transition-colors"
-          >
-            Team
-            <span className="absolute -bottom-1 left-0 h-0.5 w-full bg-gradient-to-r from-cyan-500 to-emerald-600 opacity-0 transition-opacity duration-300 group-hover:opacity-100" />
-          </a>
-
           <Link
             href="/contact"
             className="group relative text-sm font-medium text-slate-200 hover:text-white transition-colors"
@@ -91,13 +83,6 @@ export default function Navbar() {
           >
             Why Us
           </Link>
-          <a
-            href="#team"
-            onClick={closeMenu}
-            className="px-3 py-3 rounded-xl text-base font-medium text-slate-200 hover:text-cyan-400 hover:bg-white/5 transition-colors"
-          >
-            Team
-          </a>
           <Link
             href="/contact"
             onClick={closeMenu}
