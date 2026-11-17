@@ -57,7 +57,7 @@ const pricingModels = [
   {
     id: "monthly-retainer",
     badgeText: "MOST POPULAR",
-    badgeColor: "text-cyan-400",
+    badgeColor: "text-slate-950",
     badgeBgColor: "bg-cyan-400",
     badgeBorderColor: "border border-cyan-500/30",
     badgeTextColor: "text-slate-950",
