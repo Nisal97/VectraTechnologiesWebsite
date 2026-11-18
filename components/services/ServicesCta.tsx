@@ -1,6 +1,7 @@
 "use client";
 
 import Link from "next/link";
+import { FileCheck2 } from "lucide-react";
 
 export default function ServicesCta() {
   return (
@@ -37,7 +38,8 @@ export default function ServicesCta() {
             ⚡ Direct Senior Engineering Lead
           </div>
           <div className="font-mono text-xs text-slate-300 bg-slate-950/80 border border-white/10 px-3.5 py-1.5 rounded-full inline-flex items-center gap-2 m-1.5">
-            {/* Placeholder for 4th guarantee if needed */}
+            <FileCheck2 className="w-4 h-4 text-slate-300 shrink-0" />
+            100% Code & IP Ownership
           </div>
         </div>
 
