@@ -43,22 +43,25 @@ export interface ValidationResult {
 const EMAIL_REGEX = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
 const PHONE_REGEX = /^[+]?[\d\s().-]{7,20}$/;
 
+const toTrimmed = (value: unknown): string =>
+  typeof value === "string" ? value.trim() : "";
+
 export function validateContactForm(
   raw: Partial<ContactFormValues>
 ): ValidationResult {
   const sanitized: ContactFormValues = {
-    firstName: (raw.firstName ?? "").trim(),
-    lastName: (raw.lastName ?? "").trim(),
-    company: (raw.company ?? "").trim(),
-    email: (raw.email ?? "").trim(),
-    phone: (raw.phone ?? "").trim(),
-    service: (raw.service ?? "").trim(),
-    engagementModel: (raw.engagementModel ?? "").trim(),
-    requirement: (raw.requirement ?? "").trim(),
-    preferredDate: (raw.preferredDate ?? "").trim(),
-    preferredTime: (raw.preferredTime ?? "").trim(),
-    timezone: (raw.timezone ?? "").trim(),
-    honeypot: (raw.honeypot ?? "").trim(),
+    firstName: toTrimmed(raw.firstName),
+    lastName: toTrimmed(raw.lastName),
+    company: toTrimmed(raw.company),
+    email: toTrimmed(raw.email),
+    phone: toTrimmed(raw.phone),
+    service: toTrimmed(raw.service),
+    engagementModel: toTrimmed(raw.engagementModel),
+    requirement: toTrimmed(raw.requirement),
+    preferredDate: toTrimmed(raw.preferredDate),
+    preferredTime: toTrimmed(raw.preferredTime),
+    timezone: toTrimmed(raw.timezone),
+    honeypot: toTrimmed(raw.honeypot),
   };
 
   const errors: ContactFormErrors = {};
