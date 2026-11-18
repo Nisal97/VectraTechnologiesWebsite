@@ -34,6 +34,8 @@ class ContactFormTest {
         options.addArguments("--window-size=1280,900");
         if (headless) {
             options.addArguments("--headless=new");
+            options.addArguments("--no-sandbox");
+            options.addArguments("--disable-dev-shm-usage");
         }
 
         driver = new ChromeDriver(options);
