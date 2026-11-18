@@ -1,4 +1,4 @@
-package com.vectrasolutions.e2e;
+package com.e2e;
 
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
