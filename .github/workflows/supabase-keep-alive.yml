@@ -2,15 +2,15 @@ name: Keep Supabase Alive
 
 on:
   schedule:
-    # Runs at 00:00 UTC every 5 days
-    - cron: '0 0 */5 * *'
+    # Runs once daily at 02:00 UTC
+    - cron: '0 2 * * *'
   workflow_dispatch:
 
 jobs:
   ping-supabase:
     runs-on: ubuntu-latest
     steps:
-      - name: Ping Supabase REST API
+      - name: Ping Supabase Database
         env:
           SUPABASE_URL: ${{ secrets.SUPABASE_URL }}
           SUPABASE_SERVICE_ROLE_KEY: ${{ secrets.SUPABASE_SERVICE_ROLE_KEY }}
@@ -23,7 +23,8 @@ jobs:
           CLEAN_URL="${SUPABASE_URL%/}"
           RESPONSE=$(curl -s -w "\n%{http_code}" \
             -H "apikey: $SUPABASE_SERVICE_ROLE_KEY" \
-            "$CLEAN_URL/rest/v1/")
+            -H "Authorization: Bearer $SUPABASE_SERVICE_ROLE_KEY" \
+            "$CLEAN_URL/rest/v1/contact_submissions?select=id&limit=1")
 
           HTTP_STATUS=$(echo "$RESPONSE" | tail -n1)
           BODY=$(echo "$RESPONSE" | sed '$d')
